@@ -1,0 +1,9 @@
+<html>
+<head>
+<title>Bonjour</title>
+</head>
+<body>
+    @include('navbar')
+    @yield('content')
+</body>
+</html>
