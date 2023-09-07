@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\MainController;
-use App\Http\Controllers\UniqueActionController;
+use App\Http\Controllers\MainControler;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +13,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [MainControler::class, 'home']);
+Route::get('/articles', [MainControler::class, 'index']);
