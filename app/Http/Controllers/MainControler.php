@@ -15,6 +15,12 @@ class MainControler extends Controller
     public function index()
     {
         $articles = Article::paginate(4);
-        return view('article', ['articles' => $articles]);
+        return view('articles', ['articles' => $articles]);
+    }
+
+    public function show($slug)
+    {
+        $article = Article::where('slug', $slug)->firstOrFail();
+        return view('article', ['article' => $article]);
     }
 }

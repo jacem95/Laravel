@@ -1,29 +1,20 @@
 @extends('base')
 
 @section('content')
+
 <div class="jumbotron">
-<h1 class="display-3 text-center">Articles</h1>
-<div class="articles row justify-content-center">
-@foreach ($articles as $article)
-    <div class="col-md-6">
-        <div class="card my-3">
-            <div class="card-cody">
-            <h5 class="card-title">{{$article->title}}</h5>
-            <p class="card-text">{{$article->subtitle}}</p>
-            <a href="#" class="btn btn-primary">
-                Lire la suite
-                <i class="fas fa-arrow-right"></i>
-  
-            </a>
-        </div>
+<h2 class="display-4 text-center">{{$article->title}}</h2>
+<div class="d-flex justify-content-center my-5">
+    <a class="btn btn-primary" href="{{ route('articles')}}">
+        <i class="fas fa-arrow-left"></i>
+    Retour
+    </a>
     </div>
-
-        </div>
-@endforeach
+    <h5 class="text-center my-3 pt-3">{{$article->subtitle}}</h5>
 </div>
-<div class="d-flex justify-content-center mt-5">
-{{$articles->links()}}
+<div class="container">
+  <p class="text-center">
+    {{$article->content}}
+  </p>
 </div>
-</div>
-
 @endsection
