@@ -14,7 +14,7 @@
 </div>
 <div class="container">
   <p class="text-center">
-    {{$article->content}}
+    {!! $article->content !!}
   </p>
 </div>
 @endsection

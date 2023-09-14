@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -21,15 +22,24 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('article.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        //on précise qu'o, veut valider ou non les datas
+
+        $validated = $request->validated();
+        Article::create([
+            'title' => $request->input('title'),
+            'subtitle' => $request->input('subtitle'),
+            'content' => $request->input('content')
+
+        ]);
+        return redirect()->route('articles.index')->with('success', 'L article a bien été ajouté sauvegardé !');
     }
 
     /**
@@ -59,8 +69,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+
+    public function delete(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('articles.index')->with("success", "L'article a bien été supprimé !");
     }
 }
