@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('subtitle');
             $table->string('slug')->nullable();
             $table->text('content');
+            $table->unsignedBigInteger('category_id');
+            //Mise en place d'une clé étrangère pour lier la table
+            //catégorie et article
+            //jointure
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

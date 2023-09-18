@@ -23,13 +23,36 @@
                 <th>{{$article->title}}</th>
                 <th>{{$article->dateformated()}}</th>
                     <td class="d-flex">
-                        <a href="#" class="btn btn-warning mx-3">Editer</a>
+                        <a href="{{route('articles.edit',$article->id)}}" class="btn btn-warning mx-3">Editer</a>
                         <?php //on veut les inforlations avec la méthode delete et pas get
                         // donc on crée un formulaire?>
-                        <form action={{route('articles.delete',$article->id)}} method="POST">
+                          <button type="submit" class="btn btn-danger" onclick="document.getElementById('model-open-{{$article->id}}').style.display='block'">Supprimer</button>
+
+                        <form action={{route('articles.destroy',$article->id)}} method="POST">
                           @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger">Supprimer</button>
+                          
+                            <div class="modal" id="model-open-{{$article->id}}">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">La suppression d'un élément est définitif</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="document.getElementById('model-open').style.display='none'">
+                                      <span aria-hidden="true"></span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Etes-vous sûres de vouloir supprimer cet élément ?</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Oui</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="document.getElementById('model-open-{{$article->id}}').style.display='none'">Annuler</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
                         </form>
                   </td>
                     </tr>

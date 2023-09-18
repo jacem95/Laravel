@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
+use App\Manager\ArticleManager;
 use App\Models\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    private $articleManager;
+
+    public function __construct(ArticleManager $articleManager)
+    {
+        $this->articleManager = $articleManager;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,15 +36,10 @@ class ArticleController extends Controller
      */
     public function store(ArticleRequest $request)
     {
-        //on précise qu'o, veut valider ou non les datas
-
+        //on précise qu'on veut valider ou non les datas
         $validated = $request->validated();
-        Article::create([
-            'title' => $request->input('title'),
-            'subtitle' => $request->input('subtitle'),
-            'content' => $request->input('content')
 
-        ]);
+        $this->articleManager->build(new Article(), $request);
         return redirect()->route('articles.index')->with('success', 'L article a bien été ajouté sauvegardé !');
     }
 
@@ -53,24 +54,27 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        //
+        return view('article.edit', ['article' => $article]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+
+        $this->articleManager->build($article, $request);
+
+        return redirect()->route('articles.index')->with('success', 'L article a bien été modifié !');
     }
 
     /**
      * Remove the specified resource from storage.
      */
 
-    public function delete(Article $article)
+    public function destroy(Article $article)
     {
         $article->delete();
         return redirect()->route('articles.index')->with("success", "L'article a bien été supprimé !");

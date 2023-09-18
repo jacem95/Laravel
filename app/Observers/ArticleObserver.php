@@ -24,7 +24,8 @@ class ArticleObserver
      */
     public function updated(Article $article): void
     {
-        //
+        $article->slug = Str::slug($article->title, '-');
+        $article->saveQuietly();
     }
 
     /**

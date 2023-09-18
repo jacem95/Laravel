@@ -12,6 +12,11 @@
     </div>
     <h5 class="text-center my-3 pt-3">{{$article->subtitle}}</h5>
 </div>
+
+<div class="d-flex justify-content-center">
+<span class="badge bg-dark">{{$article->category->label}}</span>
+</div>
+
 <div class="container">
   <p class="text-center">
     {!! $article->content !!}

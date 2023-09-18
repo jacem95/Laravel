@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'subtitle', 'content'];
+    protected $fillable = ['title', 'subtitle', 'content', 'category_id'];
 
     public function dateformated()
     {
         return date_format($this->created_at, 'd-m-Y');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
     }
 }

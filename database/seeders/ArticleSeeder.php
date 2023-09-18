@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Category;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
@@ -13,13 +14,10 @@ class ArticleSeeder extends Seeder
      */
     public function run(): void
     {
-        $faker = Factory::create();
-        for ($i = 0; $i < 26; $i++) {
-            Article::create([
-                'title' => $faker->sentence(),
-                'subtitle' => $faker->sentence(),
-                'content' => $faker->text($maxNbChars = 600)
+        Category::get()->each(function ($category) {
+            \App\Models\Article::factory(5)->create([
+                'category_id' => $category->id
             ]);
-        }
+        });
     }
 }

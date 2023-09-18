@@ -9,6 +9,11 @@
         <div class="card my-3">
             <div class="card-cody">
             <h5 class="card-title">{{$article->title}}</h5>
+
+            <div class="d-flex justify-content-center">
+                <span class="badge bg-dark">{{$article->category->label}}</span>
+                </div>
+
             <p class="card-text">{{$article->subtitle}}</p>
             <a href="{{route('article', $article->slug)}}" class="btn btn-primary">
                 Lire la suite
