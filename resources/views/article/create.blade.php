@@ -32,6 +32,18 @@
 
             <div class="col-12">
                 <div class="form-group">
+                    <label for="category">Catégorie</label>
+                        <select name="category" class="form-control">
+                            @foreach ($categories as $category)
+                                <option value="{{$category -> id}}">{{$category -> label}}</option>
+                                
+                            @endforeach
+                        </select>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="form-group">
                     <label>Contenu</label>
                     <textarea id="tinycme-editor" name="content" class="form-control w-100"></textarea>
                 </div>
