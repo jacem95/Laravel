@@ -4,8 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
@@ -25,15 +23,28 @@ class RouteTest extends TestCase
 
     public function testAccessAdminWithAdminRole()
     {
-        $admin =  User::create([
+        $admin = User::create([
             'email' => 'admin@admin.com',
-            'name' => 'Admin',
+            'name' => 'adminbbbb',
             'password' => Hash::make('toor'),
             'role' => User::ADMIN_ROLE
         ]);
-        $this->actingAs($admin);
 
+        $this->actingAs($admin);
         $response = $this->get('/admin/articles');
         $response->assertStatus(200);
+    }
+
+    public function testConnection()
+    {
+        $reponse = $this->post('/login', [
+            'email' => 'admin@admin.com',
+            'name' => 'Admin',
+            'password' => 'toor',
+            'role' => 'ADMIN'
+        ]);
+
+        //$response = $this->get('/admin/articles');
+        $reponse->assertRedirect('/');
     }
 }
