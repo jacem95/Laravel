@@ -4,7 +4,8 @@
 
         <div class="col-10">
             <div class="articles row justify-content-center">
-            @dump($activeFilters)
+                @dump($activeFilters)
+
                 @foreach ($articles as $article)
                <div class="col-md-6">
                    <div class="card my-3">
@@ -30,11 +31,12 @@
    </div>
 </div>
 
+
    <div class="col-2 pt-3">
        @foreach ($categories as $category)
            <div class="form-group">
                <div class="custom-control custom-checkbox">
-                   <input type="checkbox" class="custom-control-input" id="{{$category->id}}" wire:model="activeFilters.{{$category->id}}"/>
+                   <input type="checkbox" class="custom-control-input" id="{{$category->id}}" wire:model="activeFilters.{{$category->id}}" value="{{$category}}"/>
                    <label class="custom-control-label" for ="{{ $category->id }}">
                        <i class="fas fa-{{$category->icon }}"></i>
                        {{$category ->label}}
@@ -42,10 +44,13 @@
                </div>
            </div>
        @endforeach
+    </div>
    </div>
    {{-- <div class="d-flex justify-content-center mt-5">
    {{$articles->links('vendor.pagination.custom')}}
    </div> --}}
    </div>
+
 </div>
+
 </div>
